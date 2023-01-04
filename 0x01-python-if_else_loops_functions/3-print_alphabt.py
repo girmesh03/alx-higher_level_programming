@@ -1,10 +1,8 @@
 #!/usr/bin/python3
 
 # write a program that prints the ASCII alphabet,
-# in lowercase, not followed by a new line.
-# except for 'q' and 'e'
+# in lowercase, except for 'q' and 'e' not followed by a new line.
 
-for i in range(97, 123):
-    if i == 101 or i == 113:
-        continue
-    print("{:c}".format(i), end="")
+for character in range(97, 123):
+    if chr(character) != 'q' and chr(character) != 'e':
+        print("{}".format(chr(character)), end="")
