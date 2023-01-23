@@ -12,7 +12,7 @@ def magic_calculation(a, b):
             else:
                 result += (a ** b) / i
         # if the addition fails, print "Too far" and break
-        except:
+        except Exception:
             # result is sum of b and a
             result = b + a
             # break out of the loop
