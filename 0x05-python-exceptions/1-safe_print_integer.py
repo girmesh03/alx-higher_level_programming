@@ -1,5 +1,5 @@
 def safe_print_integer(value):
-    """prints an integer with "{:d}".format()"""
+    """prints an integer with {:d}.format()"""
     # Try to print the value
     try:
         # print the value if it is an integer
