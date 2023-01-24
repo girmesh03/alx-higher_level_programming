@@ -8,9 +8,16 @@ class Square:
     raises an exception if the size is not an integer
     or if the size is less than 0"""
 
+    # def __init__(self, size=0):
+    #     self.__size = size
+    #     if type(self.__size) is not int:
+    #         raise TypeError("size must be an integer")
+    #     elif self.__size < 0:
+    #         raise ValueError("size must be >= 0")
+
     def __init__(self, size=0):
         self.__size = size
-        if type(self.__size) is not int:
+        if type(size) is not int:
             raise TypeError("size must be an integer")
-        elif self.__size < 0:
+        if size < 0:
             raise ValueError("size must be >= 0")
