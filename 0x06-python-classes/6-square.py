@@ -34,12 +34,16 @@ class Square:
     def position(self, value):
         # if value not satisfied the following conditions
         # raise a TypeError exception
-        if type(value) is not tuple or len(value) != 2 or \
-           type(value[0]) is not int or type(value[1]) is not int or \
-           value[0] < 0 or value[1] < 0:
-            raise TypeError("position must be a tuple of 2 positive integers")
-        # otherwise set the private instance attribute position
-        self.__position = value
+        msg = "position must be a tuple of 2 positive integers"
+
+        if type(value) is not tuple or len(value) != 2:
+            raise TypeError(msg)
+        elif type(value[0]) is not int or type(value[1]) is not int:
+            raise TypeError(msg)
+        elif value[0] < 0 or value[1] < 0:
+            raise TypeError(msg)
+        else:
+            self.__position = value
 
     # This is a public instance method that returns the current square area
     def area(self):
@@ -47,14 +51,14 @@ class Square:
 
     # This is a public instance method that prints the square
     def my_print(self):
+        # if size is 0 print an empty line
         if self.__size == 0:
             print()
         else:
+            # if position is not (0, 0) print the empty lines
             for i in range(self.__position[1]):
-                print()
+                print("")
+            # print the "#" character
             for i in range(self.__size):
-                for j in range(self.__position[0]):
-                    print(" ", end="")
-                for j in range(self.__size):
-                    print("#", end="")
-                print()
+                print(" " * self.__position[0], end="")
+                print("#" * self.__size)
