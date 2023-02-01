@@ -1,4 +1,5 @@
 #!/usr/bin/ptyhon3
+
 """Module 1-rectangle - Defines Rectangle class"""
 
 
@@ -6,7 +7,15 @@ class Rectangle:
     """Rectangle class"""
 
     def __init__(self, width=0, height=0):
-        """Instantiation with optional width and height"""
+        """Instantiation with optional width and height
+        Args:
+            width (int): width of rectangle
+            height (int): height of rectangle
+
+        Raises:
+            TypeError: if width or height are not integers
+            ValueError: if width or height are less than 0
+            """
         self.width = width
         self.height = height
 
