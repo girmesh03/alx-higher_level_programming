@@ -3,49 +3,37 @@
 
 
 class Rectangle:
-    """A class Rectangle that defines a rectangle
-    by: (based on 0-rectangle.py)
-
-    Attributes:
-        width (int): width of rectangle
-        height (int): height of rectangle
-
-    Raises:
-        TypeError: if width or height are not integers
-        ValueError: if width or height are less than 0
-    """
+    """Rectangle class"""
 
     def __init__(self, width=0, height=0):
-        """Instantiation of rectangle with optional width and height"""
+        """Instantiation with optional width and height"""
         self.width = width
         self.height = height
 
     @property
     def width(self):
-        """Getter for width"""
+        """Width getter"""
         return self.__width
 
     @width.setter
     def width(self, value):
-        """Setter for width"""
-        if isinstance(value, int) is False:
+        """Width setter"""
+        if not isinstance(value, int):
             raise TypeError("width must be an integer")
-        elif value < 0:
+        if value < 0:
             raise ValueError("width must be >= 0")
-        else:
-            self.__width = value
+        self.__width = value
 
     @property
     def height(self):
-        """Getter for height"""
+        """Height getter"""
         return self.__height
 
     @height.setter
     def height(self, value):
-        """Setter for height"""
-        if isinstance(value, int) is False:
+        """Height setter"""
+        if not isinstance(value, int):
             raise TypeError("height must be an integer")
-        elif value < 0:
+        if value < 0:
             raise ValueError("height must be >= 0")
-        else:
-            self.__height = value
+        self.__height = value
