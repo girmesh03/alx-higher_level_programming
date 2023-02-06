@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+
 """Defines is_kind_of_class function"""
 
 
