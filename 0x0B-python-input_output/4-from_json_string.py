@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """A module that defines a 4-from_json_string.py function"""
-
 import json
 
 
