@@ -11,4 +11,4 @@ FROM tv_genres
 	JOIN tv_shows ON tv_show_genres.show_id = tv_shows.id
 	JOIN tv_shows_ratings ON tv_shows.id = tv_shows_ratings.show_id
 GROUP BY tv_genres.id
-ORDER BY rating_sum DESC;
+ORDER BY rating_sum ASC;
