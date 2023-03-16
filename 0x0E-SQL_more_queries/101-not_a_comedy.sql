@@ -10,5 +10,5 @@ WHERE id NOT IN (
 		SELECT show_id
 		FROM tv_genres
 		WHERE name = 'Comedy'
-	)
+	);
 ORDER BY title ASC;
