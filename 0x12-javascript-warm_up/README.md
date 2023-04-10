@@ -97,4 +97,4 @@ In JavaScript, a dictionary is called an object. Objects are collections of key-
 To import a file in JavaScript, you can use the import statement. However, this is only available in newer versions of JavaScript and in environments that support it, such as Node.js. In older versions of JavaScript, you can use the require statement to import files.
 
 ## Author
--   **Girmachew Zewdie**  -  [Github](github.com/girmesh03)
+-   **Girmachew Zewdie**  -  [Github](https://github.com/girmesh03)
