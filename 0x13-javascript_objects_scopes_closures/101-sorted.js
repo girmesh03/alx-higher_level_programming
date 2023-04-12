@@ -7,12 +7,12 @@ A key is a number of occurrences
 A value is the list of user ids
 Print the new dictionary at the end */
 
-const dict = require('./tests/101-data.js').dict;
-const newDict = {};
+const dict = require('./101-data.js').dict;
+const newDictionary = {};
 for (const key in dict) {
-  if (newDict[dict[key]] === undefined) {
-    newDict[dict[key]] = [];
+  if (newDictionary[dict[key]] === undefined) {
+    newDictionary[dict[key]] = [];
   }
-  newDict[dict[key]].push(key);
+  newDictionary[dict[key]].push(key);
 }
-console.log(newDict);
+console.log(newDictionary);
