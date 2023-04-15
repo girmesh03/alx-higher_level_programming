@@ -1,3 +1,3 @@
 # 0x0F. Python - Object-relational mapping
-Will be updated soon
+Will be updated soon: construction
 
