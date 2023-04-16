@@ -4,8 +4,9 @@
 Write a script that takes in an argument and displays all values in the
 states table of hbtn_0e_0_usa where name matches the argument.
 
-Your script should take 4 arguments: mysql username, mysql password, database name
-and state name searched (no argument validation needed)
+Your script should take 4 arguments: mysql username,
+mysql password, database name and state name searched
+(no argument validation needed)
 
 You must use the module MySQLdb (import MySQLdb)
 Your script should connect to a MySQL server running on localhost at port 3306
