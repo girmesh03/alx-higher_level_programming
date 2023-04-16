@@ -1,29 +1,34 @@
 #!/usr/bin/python3
 """
-This script similar to model_state.py named model_city.py
-that contains the class definition of a City
+prints all City objects from the database hbtn_0e_14_usa
 """
 
-from sqlalchemy import Column, Integer, String, ForeignKey
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship
+import sys
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 from model_state import Base, State
+from model_city import City
 
-Base = declarative_base()
+if __name__ == "__main__":
+    # Set up connection to the database
+    username = sys.argv[1]
+    password = sys.argv[2]
+    db_name = sys.argv[3]
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'
+                           .format(username, password, db_name),
+                           pool_pre_ping=True)
 
+    # Create a configured "Session" class
+    Session = sessionmaker(bind=engine)
 
-class City(Base):
-    """Class that represents a city"""
+    # Create a Session instance
+    session = Session()
 
-    __tablename__ = 'cities'
+    # Query the database and print results
+    results = session.query(State, City).filter(
+        State.id == City.state_id).all()
+    for state, city in results:
+        print("{}: ({}) {}".format(state.name, city.id, city.name))
 
-    id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
-    name = Column(String(128), nullable=False)
-    state_id = Column(Integer, ForeignKey('states.id'), nullable=False)
-
-    def __init__(self, name, state_id):
-        self.name = name
-        self.state_id = state_id
-
-    def __str__(self):
-        return "{}: {}".format(self.id, self.name)
+    # Close the session
+    session.close()
