@@ -10,16 +10,12 @@ from sqlalchemy.orm import sessionmaker
 from relationship_state import State
 from relationship_city import City
 
-
 if __name__ == "__main__":
-    # create an engine to the database
-    engine = create_engine("mysql+mysqldb://{}:{}@localhost/{}".format(
-        sys.argv[1], sys.argv[2], sys.argv[3]), pool_pre_ping=True)
+    engine = create_engine("mysql+mysqldb://{}:{}@localhost/{}"
+                           .format(sys.argv[1], sys.argv[2], sys.argv[3]),
+                           pool_pre_ping=True)
 
-    # create a configured "Session" class
     Session = sessionmaker(bind=engine)
-
-    # create a Session
     session = Session()
 
     # work with sess
