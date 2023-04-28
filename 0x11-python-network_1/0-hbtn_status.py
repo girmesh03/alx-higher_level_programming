@@ -7,8 +7,8 @@ import urllib.request
 
 
 if __name__ == "__main__":
-
-    with urllib.request.urlopen('https://intranet.hbtn.io/status') as resp:
+    url = 'https://intranet.hbtn.io/status'
+    with urllib.request.urlopen(url) as resp:
         data = resp.read()
         print("Body response:")
         print(f"\t- type: {type(data)}")
