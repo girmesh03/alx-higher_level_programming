@@ -6,14 +6,13 @@ of the response (decoded in utf-8)
 """
 
 import urllib.request
-import urllib.parse
 import sys
 
 
 if __name__ == "__main__":
-    url = sys.argv[1]
-    email = sys.argv[2]
-    data = urllib.parse.urlencode({'email': email}).encode('utf-8')
-    req = urllib.request.Request(url, data)
-    with urllib.request.urlopen(req) as resp:
-        print(resp.read().decode('utf-8'))
+
+    try:
+        with urllib.request.urlopen(sys.argv[1]) as resp:
+            print(resp.read().decode('utf-8'))
+    except urllib.error.HTTPError as e:
+        print("Error code: {}".format(e.code))
