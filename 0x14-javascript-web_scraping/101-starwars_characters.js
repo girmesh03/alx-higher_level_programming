@@ -10,9 +10,9 @@ const url = `https://swapi-api.alx-tools.com/api/films/${movieId}`;
 
 // Make a request to fetch movie data
 request(url, (error, response, body) => {
-  // Handle errors
+  // If an error occurred during the request, print the error object
   if (error) {
-    console.error(error);
+    console.error('Error:', error);
     return;
   }
 
@@ -23,10 +23,10 @@ request(url, (error, response, body) => {
   const characters = movie.characters;
 
   // Create an array of Promises that will be resolved when each character is fetched
-  const characterPromises = characters.map(character => {
+  const characterPromises = characters.map(characters => {
     return new Promise((resolve, reject) => {
-      request(character, (error, response, body) => {
-        // Handle errors
+      request(characters, (error, response, body) => {
+        // if an error occurred, reject the Promise
         if (error) {
           reject(error);
           return;
@@ -45,7 +45,7 @@ request(url, (error, response, body) => {
       console.log(characters.join('\n'));
     })
     .catch(error => {
-      console.error(error);
+      console.error('Error:', error);
     });
 });
 
