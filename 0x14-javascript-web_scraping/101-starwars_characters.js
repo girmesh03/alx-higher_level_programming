@@ -12,7 +12,7 @@ const url = `https://swapi-api.alx-tools.com/api/films/${movieId}`;
 request(url, (error, response, body) => {
   // Handle errors
   if (error) {
-    console.error('Error:', error);
+    console.error(error);
     return;
   }
 
@@ -29,9 +29,11 @@ request(url, (error, response, body) => {
         // Handle errors
         if (error) {
           reject(error);
+          return;
         } else {
           // Resolve with character name
-          resolve(JSON.parse(body).name);
+          const character_name = JSON.parse(body)
+          resolve(character_name.name);
         }
       });
     });
@@ -43,7 +45,7 @@ request(url, (error, response, body) => {
       console.log(characters.join('\n'));
     })
     .catch(error => {
-      console.error('Error:', error);
+      console.error(error);
     });
 });
 
