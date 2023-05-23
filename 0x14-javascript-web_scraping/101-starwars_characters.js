@@ -1,44 +1,55 @@
 #!/usr/bin/node
-// A script that prints all characters of a Star Wars movie:
+// A script that prints all characters of a Star Wars movie synchronously
 
-// The first argument is the Movie ID - example: 3 = “Return of the Jedi”
-const movieId = process.argv[2];
-
-// The request must be made to https://swapi-api.hbtn.io/api/films/:id
-// const url = 'https://swapi-api.hbtn.io/api/films/' + movieId;
-const url = `https://swapi-api.alx-tools.com/api/films/${movieId}`;
-
-// Display one character name by line in the same order of the list “characters” in the /films/ response
+// Require the request module
 const request = require('request');
 
-function getCharacterName(url) {
-  return new Promise((resolve, reject) => {
-    request(url, function (error, _response, body) {
-      if (error) {
-        reject(error);
-      } else {
-        const characterName = JSON.parse(body).name;
-        resolve(characterName);
-      }
-    });
+// Get movie ID from command line argument
+const movieId = process.argv[2];
+
+// Construct URL to fetch movie data
+const url = `https://swapi.dev/api/films/${movieId}`;
+
+// Make a request to fetch movie data
+request(url, (error, response, body) => {
+  // Handle errors
+  if (error) {
+    console.error('Error:', error);
+    return;
+  }
+
+  // Parse movie data
+  const film = JSON.parse(body);
+
+  // Get URLs of characters in the movie
+  const charactersUrls = film.characters;
+
+  // Fetch and print the character names synchronously
+  fetchAndPrintCharacters(charactersUrls);
+});
+
+function fetchAndPrintCharacters(urls) {
+  if (urls.length === 0) {
+    return;
+  }
+
+  const characterUrl = urls.shift();
+
+  // Make a request to fetch character data
+  request(characterUrl, (error, response, body) => {
+    // Handle errors
+    if (error) {
+      console.error('Error:', error);
+      return;
+    }
+
+    // Parse character data
+    const character = JSON.parse(body);
+
+    // Print the name of the character
+    console.log(character.name);
+
+    // Fetch and print the next character name
+    fetchAndPrintCharacters(urls);
   });
 }
-
-request(url, function (error, _response, body) {
-  if (error) {
-    console.error(error);
-  } else {
-    const characters = JSON.parse(body).characters;
-    const characterPromises = characters.map(getCharacterName);
-
-    Promise.all(characterPromises)
-      .then((characterNames) => {
-        for (const characterName of characterNames) {
-          console.log(characterName);
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
-});
