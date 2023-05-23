@@ -2,46 +2,48 @@
 // prints all characters of a Star Wars movie synchronously
 const request = require('request');
 
-// Get movie ID from command line argument
+// Get the movie ID from the command line arguments
 const movieId = process.argv[2];
 
-// Construct URL to fetch movie data
+// The request must be made to https://swapi-api.hbtn.io/api/films/:id
 const url = 'https://swapi-api.hbtn.io/api/films/' + movieId;
 
-// Make a request to fetch movie data
+// Make the request to get the movie data
 request(url, (error, response, body) => {
-  // If an error occurred during the request, print the error object
+  // if an error occurred during the request, print the error object
   if (error) {
-    console.error('Error:', error);
+    console.error(error);
     return;
   }
 
-  // Parse JSON string into object
+  // Parse movie data
   const movie = JSON.parse(body);
 
-  // Get characters from movie object
+  // Get URLs of characters in the movie
   const charactersUrls = movie.characters;
 
-  // Create an array of Promises that will be resolved when each character is fetched
+  // Process each character URL
   const charactersPromises = charactersUrls.map(characterUrl => {
-    // Create a Promise that will be resolved when the character is fetched
+    // Return a new promise for each character URL
     return new Promise((resolve, reject) => {
+      // Request the character URL
       request(characterUrl, (error, response, body) => {
-        // if an error occurred, reject the Promise
+        // If an error occurred during the request, reject the promise
         if (error) {
           reject(error);
           return;
         }
 
-        // Resolve with character name
-        const character = JSON.parse(body)
-        resolve(character.name);
+        // Parse character data
+        const character = JSON.parse(body);
 
+        // Resolve the promise with the character name
+        resolve(character.name);
       });
     });
   });
 
-  // Resolve all Promises
+  // Resolve all promises
   Promise.all(charactersPromises)
     .then(characters => {
       console.log(characters.join('\n'));
@@ -50,4 +52,3 @@ request(url, (error, response, body) => {
       console.error('Error:', error);
     });
 });
-
