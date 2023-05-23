@@ -8,7 +8,7 @@ const episodeNumber = process.argv[2];
 const request = require('request');
 
 // Make the request and print the title of the movie
-request('https://swapi-api.hbtn.io/api/films/' + episodeNumber, function (error, response, body) {
+request('https://swapi-api.hbtn.io/api/films/' + episodeNumber, function (error, _response, body) {
   // If an error occurred during the request, print the error object
   if (error) {
     console.error(error);
