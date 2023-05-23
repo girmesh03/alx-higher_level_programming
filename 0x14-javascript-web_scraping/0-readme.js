@@ -1,17 +1,17 @@
 #!/usr/bin/node
-// a script that reads and prints the content of a file
+// Write a script that reads and prints the content of a file.
 const fs = require('fs');
 
-// file path
+// The content of the file must be read in utf-8
 const file = process.argv[2];
 
-// Read the contents of the file asynchronously
+// Read the file and print its content
 fs.readFile(file, 'utf-8', (err, data) => {
+  // If an error occurred during the reading, print the error object and return
   if (err) {
-    // If there was an error reading the file, log the error object to the console
     console.error(err);
     return;
   }
-  // If the file was read successfully, log its contents to the console
+  // otherwise, print the content of the file
   console.log(data);
 });
