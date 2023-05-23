@@ -6,7 +6,7 @@ const request = require('request');
 const movieId = process.argv[2];
 
 // Construct URL to fetch movie data
-const url = `https://swapi-api.alx-tools.com/api/films/${movieId}`;
+const url = 'https://swapi-api.hbtn.io/api/films/' + movieId;
 
 // Make a request to fetch movie data
 request(url, (error, response, body) => {
