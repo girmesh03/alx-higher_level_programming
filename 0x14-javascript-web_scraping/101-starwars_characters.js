@@ -20,12 +20,13 @@ request(url, (error, response, body) => {
   const movie = JSON.parse(body);
 
   // Get characters from movie object
-  const character_urls = movie.characters;
+  const charactersUrls = movie.characters;
 
   // Create an array of Promises that will be resolved when each character is fetched
-  const charactersPromises = character_urls.map(character_url => {
+  const charactersPromises = charactersUrls.map(characterUrl => {
+    // Create a Promise that will be resolved when the character is fetched
     return new Promise((resolve, reject) => {
-      request(character_url, (error, response, body) => {
+      request(characterUrl, (error, response, body) => {
         // if an error occurred, reject the Promise
         if (error) {
           reject(error);
