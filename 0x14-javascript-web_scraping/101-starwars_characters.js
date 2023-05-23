@@ -16,36 +16,39 @@ request(url, (error, response, body) => {
     return;
   }
 
-  // Parse JSON string into object
-  const movie = JSON.parse(body);
+  // Parse movie data
+  const film = JSON.parse(body);
 
-  // Get characters from movie object
-  const characters = movie.characters;
+  // Get URLs of characters in the movie
+  const charactersUrls = film.characters;
 
-  // Create an array of Promises that will be resolved when each character is fetched
-  const characterPromises = characters.map(character => {
+  // Create an array of promises that will fetch the data of each character
+  const charactersPromises = charactersUrls.map(characterUrl => {
+    // Create a promise that will fetch the data of a character
     return new Promise((resolve, reject) => {
-      request(character, (error, response, body) => {
+      // Make a request to fetch character data
+      request(characterUrl, (error, response, body) => {
         // Handle errors
         if (error) {
           reject(error);
-        } else {
-          // Resolve with character name
-          resolve(JSON.parse(body).name);
+          return;
         }
+
+        // Parse character data
+        const character = JSON.parse(body);
+
+        // Resolve the promise with the name of the character
+        resolve(character.name);
       });
     });
   });
 
-  // Resolve all Promises
-  Promise.all(characterPromises)
+  // Wait for all promises to resolve and then print the names of the characters
+  Promise.all(charactersPromises)
     .then(characters => {
-      // Print characters
-      characters.forEach(character => console.log(character));
+      console.log(characters.join('\n'));
     })
     .catch(error => {
-      console.error(error);
-    }
-    );
+      console.error('Error:', error);
+    });
 });
-
