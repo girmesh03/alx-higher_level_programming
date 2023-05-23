@@ -20,27 +20,28 @@ request(url, (error, response, body) => {
   const movie = JSON.parse(body);
 
   // Get characters from movie object
-  const characters = movie.characters;
+  const character_urls = movie.characters;
 
   // Create an array of Promises that will be resolved when each character is fetched
-  const characterPromises = characters.map(characters => {
+  const charactersPromises = character_urls.map(character_url => {
     return new Promise((resolve, reject) => {
-      request(characters, (error, response, body) => {
+      request(character_url, (error, response, body) => {
         // if an error occurred, reject the Promise
         if (error) {
           reject(error);
           return;
-        } else {
-          // Resolve with character name
-          const character_name = JSON.parse(body)
-          resolve(character_name.name);
         }
+
+        // Resolve with character name
+        const character = JSON.parse(body)
+        resolve(character.name);
+
       });
     });
   });
 
   // Resolve all Promises
-  Promise.all(characterPromises)
+  Promise.all(charactersPromises)
     .then(characters => {
       console.log(characters.join('\n'));
     })
